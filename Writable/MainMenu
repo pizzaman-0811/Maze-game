@@ -1,0 +1,70 @@
+package ui;
+
+import javax.swing.*;
+import java.awt.*;
+
+/**
+ * Represents the main menu panel in the Maze Game GUI.
+ * Provides options to start a new game, load a saved game, view the inventory,
+ * view instructions, or exit the game.
+ */
+public class MainMenu extends JPanel {
+    /**
+     * REQUIRES: All Runnable parameters are valid and not null.
+     * MODIFIES: this
+     * EFFECTS: Initializes the main menu with a title and buttons for the main menu
+     * actions.
+     * Each button triggers the corresponding action when clicked.
+     * 
+     * @param startGameAction        the action to start a new game
+     * @param loadGameAction         the action to load a saved game
+     * @param viewInventoryAction    the action to view the inventory
+     * @param viewInstructionsAction the action to view the game instructions
+     */
+    @SuppressWarnings("methodlength")
+    public MainMenu(Runnable startGameAction, Runnable loadGameAction, Runnable viewInventoryAction,
+            Runnable viewInstructionsAction) {
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        // Title label
+        JLabel titleLabel = new JLabel("Maze Game", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setAlignmentX(CENTER_ALIGNMENT);
+
+        // New Game button
+        JButton newGameButton = new JButton("New Game");
+        newGameButton.addActionListener(e -> startGameAction.run());
+
+        // Load Game button
+        JButton loadGameButton = new JButton("Load Game");
+        loadGameButton.addActionListener(e -> loadGameAction.run());
+
+        // Inventory button
+        JButton inventoryButton = new JButton("Inventory");
+        inventoryButton.addActionListener(e -> viewInventoryAction.run());
+
+        // Instructions button
+        JButton instructionsButton = new JButton("Instructions");
+        instructionsButton.addActionListener(e -> viewInstructionsAction.run());
+
+        // Exit button
+        JButton exitButton = new JButton("Exit");
+        exitButton.addActionListener(e -> System.exit(0));
+
+        // Add components to the panel
+        add(titleLabel);
+        add(Box.createVerticalStrut(20)); // Spacer
+        add(newGameButton);
+        add(Box.createVerticalStrut(10));
+        add(loadGameButton);
+        add(Box.createVerticalStrut(10));
+        add(inventoryButton);
+        add(Box.createVerticalStrut(10));
+        add(instructionsButton);
+        add(Box.createVerticalStrut(10));
+        add(exitButton);
+
+        // Add padding around the panel
+        setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
+    }
+}
